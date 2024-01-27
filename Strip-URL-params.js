@@ -37,3 +37,5 @@ function stripUrlParams(url, paramsToStrip) {
 
 	return domain + (newQueryStr ? '?' + newQueryStr : '');
 }
+
+// or

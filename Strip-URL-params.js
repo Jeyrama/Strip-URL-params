@@ -11,3 +11,29 @@ Examples:
 
 
 // Solution
+
+function stripUrlParams(url, paramsToStrip) {
+	let domain = url.split('?')[0];
+	let query = url.split('?')[1];
+	let obj = {};
+	let pairKey;
+	let pairValue;
+	let newQueryStr;
+
+	if (!query) return domain;
+
+	query.split('&').forEach(function(pair) {
+		pairKey = pair.split('=')[0];
+		pairValue = pair.split('=')[1];
+		if (paramsToStrip ? paramsToStrip.some(function(param) {
+				return param === pairKey
+			}) : null || obj.hasOwnProperty(pairKey)) return;
+		obj[pairKey] = pairValue;
+	});
+
+	newQueryStr = Object.keys(obj).map(function(key) {
+		return key + '=' + obj[key];
+	}).join('&');
+
+	return domain + (newQueryStr ? '?' + newQueryStr : '');
+}
